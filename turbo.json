@@ -1,0 +1,28 @@
+{
+	"$schema": "https://turborepo.org/schema.json",
+	"pipeline": {
+		"next-build": {
+			"outputs": [
+				".next/**"
+			]
+		},
+		"next-lint": {
+			"outputs": []
+		},
+		"next-sitemap": {
+			"dependsOn": [
+				"next-build"
+			],
+			"cache": false,
+			"outputs": [
+				"public/sitemap*"
+			]
+		},
+		"next-dev": {
+			"cache": false
+		}
+	},
+	"globalEnv": [
+		"NEXT_PUBLIC_ORIGIN"
+	]
+}
