@@ -1,5 +1,6 @@
 import { ImageResponse } from "@vercel/og";
 import { NextRequest } from "next/server";
+import { Canvas } from "@react-three/fiber";
 
 export const config = {
 	runtime: "experimental-edge"
@@ -83,6 +84,16 @@ export default async function handler(req: NextRequest) {
 							</svg>
 							<span style={{ marginLeft: 10 }}>github.com/josbroers/nextjs-skeleton</span>
 						</div>
+					</div>
+					<div id="fancy">
+						 <Canvas
+							shadows
+							className="fancy-canvas"
+							camera={{
+								position: [-6, 7, 7],
+							}}
+						>
+						</Canvas>
 					</div>
 				</div>
 			),
