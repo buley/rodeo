@@ -85,16 +85,6 @@ export default async function handler(req: NextRequest) {
 							<span style={{ marginLeft: 10 }}>github.com/josbroers/nextjs-skeleton</span>
 						</div>
 					</div>
-					<div id="fancy">
-						 <Canvas
-							shadows
-							className="fancy-canvas"
-							camera={{
-								position: [-6, 7, 7],
-							}}
-						>
-						</Canvas>
-					</div>
 				</div>
 			),
 			{
