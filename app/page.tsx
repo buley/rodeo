@@ -6,6 +6,11 @@ import styles from "./page.module.scss";
 import Schema from "@components/schema";
 import { seo } from "./head";
 import { Canvas } from '@react-three/fiber'
+import Floor from "@components/floor";
+import LightBulb from "@components/lightbulb";
+import Box from "@components/box";
+import Ambient from "@components/ambient";
+
 
 export default function Page() {
 	return (
@@ -19,19 +24,23 @@ export default function Page() {
 				href={`${process.env.NEXT_PUBLIC_ORIGIN}/`}
 			/>
 			<Container size="small">
-				<Canvas className={styles.canvas}>
-					<ambientLight />
-					<pointLight position={[10, 10, 10]} />
-					<mesh>
-						<boxBufferGeometry args={[2, 2, 2]} />
-						<meshStandardMaterial color="hotpink" />
-					</mesh>
+				<Canvas
+					shadows
+					className={styles.canvas}
+					camera={{
+						position: [-6, 7, 7],
+					  }}	
+				>
+        			<Ambient/>
+					<Box position={[0, 0, 0]} rotateX={3} rotateY={0.2} />
+					<LightBulb position={[10, 10, 10]}/>
+					<Floor/>
 				</Canvas>
 				<h1 className={styles.title}>
 					Rodeo
 				</h1>
 				<p className={styles.description}>
-					TKTK
+					&nbsp;
 				</p>
 				
 			</Container>
