@@ -27,16 +27,21 @@
     "volta-update": "volta pin node@^18.0"
   },
   "dependencies": {
+    "@neo4j/graphql": "^3.17.2",
+    "@neo4j/introspector": "^1.0.3",
     "@next/font": "^13.1.1",
     "@react-three/fiber": "^8.12.0",
     "@svgr/webpack": "^6.2",
     "@types/three": "^0.150.0",
     "@vercel/og": "^0.0.21",
+    "apollo-server": "^3.12.0",
+    "neo4j-driver": "^5.6.0",
     "next": "^13.1.1",
     "next-sitemap": "^3.1.44",
     "react": "^18",
     "react-dom": "^18",
-    "three": "^0.151.2"
+    "three": "^0.151.2",
+    "twokeys": "^1.0.3"
   },
   "devDependencies": {
     "@types/node": "^18.11.18",
