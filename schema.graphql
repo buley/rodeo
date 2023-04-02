@@ -1,0 +1,225 @@
+interface BreedProperties @relationshipProperties {
+	superBreed: Boolean!
+}
+
+interface CityProperties @relationshipProperties {
+	raceStartTimeUnix: BigInt!
+}
+
+interface ClassProperties @relationshipProperties {
+	raceStartTimeUnix: BigInt!
+}
+
+interface ColorProperties @relationshipProperties {
+	superCoat: Boolean!
+}
+
+interface CountryProperties @relationshipProperties {
+	raceStartTimeUnix: BigInt!
+}
+
+type DataBucket @exclude(operations: [CREATE, DELETE, UPDATE]) {
+	bucketName: String!
+}
+
+interface DayProperties @relationshipProperties {
+	raceStartTimeUnix: BigInt!
+}
+
+interface DistanceProperties @relationshipProperties {
+	raceStartTimeUnix: BigInt!
+}
+
+interface EventProperties @relationshipProperties {
+	raceStartTimeUnix: BigInt!
+}
+
+interface FeeProperties @relationshipProperties {
+	raceStartTimeUnix: BigInt!
+}
+
+interface FiveminuteProperties @relationshipProperties {
+	raceStartTimeUnix: BigInt!
+}
+
+interface GroupProperties @relationshipProperties {
+	colorRarity: BigInt!
+}
+
+type Horse @exclude(operations: [CREATE, DELETE, UPDATE]) {
+	bloodlineHorseBloodlines: [HorseBloodline!]! @relationship(type: "BLOODLINE", direction: OUT)
+	breedHorseBreeds: [HorseBreed!]! @relationship(type: "BREED", direction: OUT, properties: "BreedProperties")
+	colorHorseColors: [HorseColor!]! @relationship(type: "COLOR", direction: OUT, properties: "ColorProperties")
+	genotypeHorseGenotypes: [HorseGenotype!]! @relationship(type: "GENOTYPE", direction: OUT)
+	horseId: BigInt!
+	horsesParent: [Horse!]! @relationship(type: "PARENT", direction: IN, properties: "ParentProperties")
+	parentHorses: [Horse!]! @relationship(type: "PARENT", direction: OUT, properties: "ParentProperties")
+	stablesOwner: [Stable!]! @relationship(type: "OWNER", direction: IN)
+	typeHorseTypes: [HorseType!]! @relationship(type: "TYPE", direction: OUT)
+}
+
+type HorseBloodline @exclude(operations: [CREATE, DELETE, UPDATE]) {
+	bloodlineName: String!
+	horsesBloodline: [Horse!]! @relationship(type: "BLOODLINE", direction: IN)
+}
+
+type HorseBreed @exclude(operations: [CREATE, DELETE, UPDATE]) {
+	breedName: String!
+	horsesBreed: [Horse!]! @relationship(type: "BREED", direction: IN, properties: "BreedProperties")
+}
+
+type HorseColor @exclude(operations: [CREATE, DELETE, UPDATE]) {
+	colorName: String!
+	groupHorseColorGroups: [HorseColorGroup!]! @relationship(type: "GROUP", direction: OUT, properties: "GroupProperties")
+	horsesColor: [Horse!]! @relationship(type: "COLOR", direction: IN, properties: "ColorProperties")
+	rarityHorseColorRarities: [HorseColorRarity!]! @relationship(type: "RARITY", direction: OUT, properties: "RarityProperties")
+}
+
+type HorseColorGroup @exclude(operations: [CREATE, DELETE, UPDATE]) {
+	groupName: String!
+	horseColorsGroup: [HorseColor!]! @relationship(type: "GROUP", direction: IN, properties: "GroupProperties")
+}
+
+type HorseColorRarity @exclude(operations: [CREATE, DELETE, UPDATE]) {
+	horseColorsRarity: [HorseColor!]! @relationship(type: "RARITY", direction: IN, properties: "RarityProperties")
+	rarityName: String!
+}
+
+type HorseGender @exclude(operations: [CREATE, DELETE, UPDATE]) {
+	genderName: String!
+	horseTypesGender: [HorseType!]! @relationship(type: "GENDER", direction: IN)
+}
+
+type HorseGenotype @exclude(operations: [CREATE, DELETE, UPDATE]) {
+	genotypeName: String!
+	horsesGenotype: [Horse!]! @relationship(type: "GENOTYPE", direction: IN)
+}
+
+type HorseType @exclude(operations: [CREATE, DELETE, UPDATE]) {
+	genderHorseGenders: [HorseGender!]! @relationship(type: "GENDER", direction: OUT)
+	horsesType: [Horse!]! @relationship(type: "TYPE", direction: IN)
+	typeName: String!
+}
+
+interface HourProperties @relationshipProperties {
+	raceStartTimeUnix: BigInt!
+}
+
+interface MinuteProperties @relationshipProperties {
+	raceStartTimeUnix: BigInt!
+}
+
+interface MonthProperties @relationshipProperties {
+	raceStartTimeUnix: BigInt!
+}
+
+interface NameProperties @relationshipProperties {
+	raceStartTimeUnix: BigInt!
+}
+
+interface ParentProperties @relationshipProperties {
+	horseBirthday: String!
+}
+
+interface QuarterhourProperties @relationshipProperties {
+	raceStartTimeUnix: BigInt!
+}
+
+type Race @exclude(operations: [CREATE, DELETE, UPDATE]) {
+	cityRaceCities: [RaceCity!]! @relationship(type: "CITY", direction: OUT, properties: "CityProperties")
+	classRaceClasses: [RaceClass!]! @relationship(type: "CLASS", direction: OUT, properties: "ClassProperties")
+	countryRaceCountries: [RaceCountry!]! @relationship(type: "COUNTRY", direction: OUT, properties: "CountryProperties")
+	dayTimeBuckets: [TimeBucket!]! @relationship(type: "DAY", direction: OUT, properties: "DayProperties")
+	distanceRaceDistances: [RaceDistance!]! @relationship(type: "DISTANCE", direction: OUT, properties: "DistanceProperties")
+	eventRaceEventTypes: [RaceEventType!]! @relationship(type: "EVENT", direction: OUT, properties: "EventProperties")
+	feeRaceFees: [RaceFee!]! @relationship(type: "FEE", direction: OUT, properties: "FeeProperties")
+	fiveminuteTimeBuckets: [TimeBucket!]! @relationship(type: "FIVEMINUTE", direction: OUT, properties: "FiveminuteProperties")
+	hourTimeBuckets: [TimeBucket!]! @relationship(type: "HOUR", direction: OUT, properties: "HourProperties")
+	minuteTimeBuckets: [TimeBucket!]! @relationship(type: "MINUTE", direction: OUT, properties: "MinuteProperties")
+	monthTimeBuckets: [TimeBucket!]! @relationship(type: "MONTH", direction: OUT, properties: "MonthProperties")
+	nameRaceNames: [RaceName!]! @relationship(type: "NAME", direction: OUT, properties: "NameProperties")
+	quarterhourTimeBuckets: [TimeBucket!]! @relationship(type: "QUARTERHOUR", direction: OUT, properties: "QuarterhourProperties")
+	raceId: String!
+	racePrizePools: String!
+	raceStartTime: String!
+	raceStartTimeUnix: Float!
+	weatherRaceWeathers: [RaceWeather!]! @relationship(type: "WEATHER", direction: OUT, properties: "WeatherProperties")
+	weekdayTimeBuckets: [TimeBucket!]! @relationship(type: "WEEKDAY", direction: OUT, properties: "WeekdayProperties")
+	yearTimeBuckets: [TimeBucket!]! @relationship(type: "YEAR", direction: OUT, properties: "YearProperties")
+}
+
+type RaceCity @exclude(operations: [CREATE, DELETE, UPDATE]) {
+	raceCity: String!
+	racesCity: [Race!]! @relationship(type: "CITY", direction: IN, properties: "CityProperties")
+}
+
+type RaceClass @exclude(operations: [CREATE, DELETE, UPDATE]) {
+	raceClass: BigInt!
+	racesClass: [Race!]! @relationship(type: "CLASS", direction: IN, properties: "ClassProperties")
+}
+
+type RaceCountry @exclude(operations: [CREATE, DELETE, UPDATE]) {
+	raceCountry: String!
+	racesCountry: [Race!]! @relationship(type: "COUNTRY", direction: IN, properties: "CountryProperties")
+}
+
+type RaceDistance @exclude(operations: [CREATE, DELETE, UPDATE]) {
+	raceDistance: BigInt!
+	racesDistance: [Race!]! @relationship(type: "DISTANCE", direction: IN, properties: "DistanceProperties")
+}
+
+type RaceEventType @exclude(operations: [CREATE, DELETE, UPDATE]) {
+	raceEventType: String!
+	racesEvent: [Race!]! @relationship(type: "EVENT", direction: IN, properties: "EventProperties")
+}
+
+type RaceFee @exclude(operations: [CREATE, DELETE, UPDATE]) {
+	racesFee: [Race!]! @relationship(type: "FEE", direction: IN, properties: "FeeProperties")
+}
+
+type RaceField @exclude(operations: [CREATE, DELETE, UPDATE]) {
+	raceField: BigInt!
+}
+
+type RaceName @exclude(operations: [CREATE, DELETE, UPDATE]) {
+	raceName: String!
+	racesName: [Race!]! @relationship(type: "NAME", direction: IN, properties: "NameProperties")
+}
+
+type RaceWeather @exclude(operations: [CREATE, DELETE, UPDATE]) {
+	raceWeather: String!
+	racesWeather: [Race!]! @relationship(type: "WEATHER", direction: IN, properties: "WeatherProperties")
+}
+
+interface RarityProperties @relationshipProperties {
+	colorRarity: BigInt!
+}
+
+type Stable @exclude(operations: [CREATE, DELETE, UPDATE]) {
+	addressId: String!
+	ownerHorses: [Horse!]! @relationship(type: "OWNER", direction: OUT)
+}
+
+type TimeBucket @exclude(operations: [CREATE, DELETE, UPDATE]) {
+	bucketValue: BigInt!
+	racesDay: [Race!]! @relationship(type: "DAY", direction: IN, properties: "DayProperties")
+	racesFiveminute: [Race!]! @relationship(type: "FIVEMINUTE", direction: IN, properties: "FiveminuteProperties")
+	racesHour: [Race!]! @relationship(type: "HOUR", direction: IN, properties: "HourProperties")
+	racesMinute: [Race!]! @relationship(type: "MINUTE", direction: IN, properties: "MinuteProperties")
+	racesMonth: [Race!]! @relationship(type: "MONTH", direction: IN, properties: "MonthProperties")
+	racesQuarterhour: [Race!]! @relationship(type: "QUARTERHOUR", direction: IN, properties: "QuarterhourProperties")
+	racesWeekday: [Race!]! @relationship(type: "WEEKDAY", direction: IN, properties: "WeekdayProperties")
+	racesYear: [Race!]! @relationship(type: "YEAR", direction: IN, properties: "YearProperties")
+}
+
+interface WeatherProperties @relationshipProperties {
+	raceStartTimeUnix: BigInt!
+}
+
+interface WeekdayProperties @relationshipProperties {
+	raceStartTimeUnix: BigInt!
+}
+
+interface YearProperties @relationshipProperties {
+	raceStartTimeUnix: BigInt!
+}
